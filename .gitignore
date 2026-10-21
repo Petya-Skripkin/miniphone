@@ -1,0 +1,26 @@
+# Local credentials and configuration
+config.toml
+config.toml.*
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Python and local environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Runtime and editor files
+*.log
+*.pid
+*.bak
+*.swp
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

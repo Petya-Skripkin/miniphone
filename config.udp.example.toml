@@ -1,0 +1,47 @@
+# Copy to config.toml. Python 3.11+. IPv4 SIP/UDP or SIP/WSS + WebRTC, one call at a time.
+[sip]
+server = "sip.test" # IP or hostname, without sip://
+port = 5060
+transport = "udp" # "wss" enables WebRTC media
+wss_url = "wss://sip.test:7443/"
+# Empty pin: verify hostname with system CA or tls_ca_file.
+# For a self-signed certificate, obtain its SHA-256 via a trusted channel.
+tls_cert_sha256 = ""
+tls_ca_file = ""
+username = "idc"
+password = "CHANGE_ME"
+# Set domain only if the SIP server requires a different identity domain.
+domain = ""
+auth_username = ""
+bind = "0.0.0.0"
+local_port = 5060
+advertise_ip = "" # Empty: choose local interface by route to server
+register = true
+expires = 300
+
+[media]
+rtp_port = 40000 # audio RTP/RTCP: 40000/40001; video: 40002/40003
+audio_codecs = ["PCMU", "PCMA", "G722", "G729"]
+video_codecs = ["H264", "VP8", "AV1"]
+video = true
+width = 640
+height = 480
+fps = 15
+video_bitrate = 1500000
+jitter_ms = 100
+# GStreamer device pipelines; these are trusted local settings.
+audio_source = "autoaudiosrc"
+audio_sink = "autoaudiosink"
+video_source = "autovideosrc"
+video_sink = "autovideosink"
+# Test sources/sinks only when true; no real microphone, camera or playback.
+test = false
+auto_answer = false
+
+[webrtc]
+audio_codec = "PCMU" # PCMU or PCMA, also enabled in media.audio_codecs
+video_codec = "VP8" # VP8 or H264, also enabled in media.video_codecs
+ice_min_port = 41000
+ice_max_port = 41100
+stun_server = "" # Optional stun://host:port for other networks
+turn_server = "" # Optional turn://user:password@host:port
